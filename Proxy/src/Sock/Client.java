@@ -28,9 +28,8 @@ public class Client {
             System.out.println("Aguardando requisicao:");
             req = ent.nextLine();
             out.println(req);
-
-            // Receber e imprimir a resposta do servidor
             String response = in.readLine();
+       
             if (response != null) {
                 System.out.println("Resposta do servidor: " + response);
             }

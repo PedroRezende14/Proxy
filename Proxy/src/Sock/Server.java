@@ -17,7 +17,7 @@ public class Server {
     private ServerSocket serverSocket;
     private ConcurrentHashMap<Integer, String> cache = new ConcurrentHashMap<>();
     private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-    private static final int CACHE_EXPIRATION_TIME = 60; // seconds
+    private static final int CACHE_EXPIRATION_TIME = 10; 
 
     public void start() {
         try {
@@ -32,11 +32,12 @@ public class Server {
     }
 
     private String buscarDados(int id) {
+    	
         if (cache.containsKey(id)) {
-            System.out.println("Dados obtidos do cache");
+            System.out.print("Dados do cache: ");
             return cache.get(id);
         } else {
-            System.out.println("Dados obtidos do banco de dados");
+            System.out.print("Dados do banco de dados: ");
             String dados = Sock.BancodeDados.consultarBD(id);
             if (dados != null) {
                 cache.put(id, dados);
@@ -62,10 +63,10 @@ public class Server {
                 System.out.println("Cliente " + clientSocket.getRemoteSocketAddress() + " realizou uma conexão");
                 String msg;
                 while ((msg = in.readLine()) != null) {
-                    int id = Integer.parseInt(msg); // Supondo que a mensagem é o ID
+                    int id = Integer.parseInt(msg); 
                     String dados = buscarDados(id);
-                    out.println("Dados para o ID " + id + ": " + dados);
-                    System.out.println("Dados para o ID " + id + ": " + dados);
+                    out.println("ID " + id + ": " + dados);
+                    System.out.println("ID " + id + ": " + dados);
                 }
             } catch (IOException e) {
                 System.err.println("Erro ao receber a mensagem: " + e.getMessage());

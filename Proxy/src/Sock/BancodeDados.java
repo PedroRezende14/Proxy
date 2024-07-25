@@ -38,8 +38,6 @@ public class BancodeDados {
 
             if (rs.next()) {
                 resultado = rs.getString("dado");
-            }else {
-            	System.out.println("não foi encontado no banco de dados");
             }
 
         } catch (SQLException e) {
