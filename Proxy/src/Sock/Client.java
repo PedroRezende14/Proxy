@@ -29,7 +29,7 @@ public class Client {
             req = ent.nextLine();
             out.println(req);
             String response = in.readLine();
-       
+
             if (response != null) {
                 System.out.println("Resposta do servidor: " + response);
             }
